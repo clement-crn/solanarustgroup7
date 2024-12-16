@@ -63,6 +63,35 @@ pub struct CreateCampaign<'info> {
 pub struct Initialize {}
 
 //------------SEND FUND FROM FAKE ANOTHER ACCOUNT---------
+// DEV IN PROGRESS /!\
+#[program]
+pub mod solanarustgroup7 {
+    use super::*;
+
+    pub fn send_fund(ctx: Context<SendFund>, amount: u64) -> Result<()> {
+        let campaign = &mut ctx.accounts.campaign;
+
+        campaign.current_funds += amount;
+
+        msg!(
+            "Received {} SOL from {:?}. Total funds: {}",
+            amount,
+            ctx.accounts.from.key,
+            campaign.current_funds
+        );
+
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct SendFund<'info> {
+    #[account(mut)]
+    pub campaign: Account<'info, Campaign>,
+    pub from: AccountInfo<'info>,
+}
+
+
 
 
 
