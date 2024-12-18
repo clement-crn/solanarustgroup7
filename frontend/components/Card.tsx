@@ -3,7 +3,7 @@ import { Web3ReactSelectedHooks } from '@web3-react/core';
 import { Connector } from '@web3-react/types';
 import { PublicKey, SystemProgram, Connection, Transaction, clusterApiUrl } from '@solana/web3.js';
 import { AnchorProvider, Program } from '@project-serum/anchor';
-import idl from './idl.json'; // Replace with the actual IDL file for your program
+import idl from './idl.json'; 
 
 const PROGRAM_ID = new PublicKey('892sb2f1GsHR8i5zXYgtKdVTMhSPWLRGLKiVD2Sz1KKp');
 
@@ -33,12 +33,12 @@ export default function Card({
   const [campaignName, setCampaignName] = useState('');
   const [description, setDescription] = useState('');
   const [targetAmount, setTargetAmount] = useState('');
-  const [provider, setProvider] = useState<any>(null); // Adding provider state
-  const [userAccount, setUserAccount] = useState<string | null>(null); // State to store the account
-  const [userChain, setUserChain] = useState<string | null>(null); // State to store the chain ID
+  const [provider, setProvider] = useState<any>(null); 
+  const [userAccount, setUserAccount] = useState<string | null>(null);
+  const [userChain, setUserChain] = useState<string | null>(null); 
 
   const handleToggleConnect = async () => {
-    setError(undefined); // Clear error state
+    setError(undefined);
 
     if (isActive) {
       if (connector?.deactivate) {
@@ -50,13 +50,12 @@ export default function Card({
       setConnectionStatus('Connecting..');
       try {
         const provider = await window.phantom.solana.connect();
-        setProvider(provider); // Set provider state once connected
+        setProvider(provider); 
         setConnectionStatus('Connected');
         console.log('Connected to Phantom:', provider.publicKey.toString());
 
-        // Set the account and chain after successful connection
         setUserAccount(provider.publicKey.toString());
-        setUserChain('devnet'); // or get the chain programmatically if needed
+        setUserChain('devnet'); 
       } catch (e) {
         setError(e);
         setConnectionStatus('Connection Failed');
@@ -65,7 +64,6 @@ export default function Card({
   };
 
   useEffect(() => {
-    // Automatically connect if trusted
     if (window.phantom && window.phantom.solana) {
       window.phantom.solana.connect({ onlyIfTrusted: true })
         .then((resp: any) => {
@@ -73,9 +71,8 @@ export default function Card({
           setConnectionStatus('Connected');
           console.log('Eagerly connected to Phantom:', resp.publicKey.toString());
 
-          // Set the account and chain after successful connection
           setUserAccount(resp.publicKey.toString());
-          setUserChain('devnet'); // or get the chain programmatically if needed
+          setUserChain('devnet');
         })
         .catch(() => {
           setConnectionStatus('Disconnected');
@@ -89,7 +86,6 @@ export default function Card({
         throw new Error('Wallet not connected or invalid');
       }
 
-      // Validate account as PublicKey
       const walletPublicKey = new PublicKey(userAccount);
 
       const connection = new Connection(clusterApiUrl('devnet'), 'processed');
