@@ -1,0 +1,137 @@
+{
+    "address": "892sb2f1GsHR8i5zXYgtKdVTMhSPWLRGLKiVD2Sz1KKp",
+    "metadata": {
+      "name": "solanarustgroup7",
+      "version": "0.1.0",
+      "spec": "0.1.0",
+      "description": "Created with Anchor"
+    },
+    "instructions": [
+      {
+        "name": "create_campaign",
+        "discriminator": [111, 131, 187, 98, 160, 193, 114, 244],
+        "accounts": [
+          {
+            "name": "campaign",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "creator",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "target_amount",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "initialize",
+        "discriminator": [175, 175, 109, 31, 13, 152, 155, 237],
+        "accounts": [],
+        "args": []
+      },
+      {
+        "name": "send_fund",
+        "discriminator": [92, 75, 127, 184, 67, 186, 195, 140],
+        "accounts": [
+          {
+            "name": "campaign",
+            "writable": true
+          },
+          {
+            "name": "from",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    ],
+    "accounts": [
+      {
+        "name": "Campaign",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "creator",
+              "type": "publicKey"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "name": "target_amount",
+              "type": "u64"
+            },
+            {
+              "name": "current_funds",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "types": [
+      {
+        "name": "Campaign",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "creator",
+              "type": "publicKey"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "name": "target_amount",
+              "type": "u64"
+            },
+            {
+              "name": "current_funds",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ]
+  }
+  
